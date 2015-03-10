@@ -1,0 +1,16 @@
+{
+  "name": "hexy",
+  "version": "0.0.1",
+  "description": "Hexapod controller",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ashley Wilson",
+  "license": "ISC",
+  "dependencies": {
+    "adafruit-i2c-pwm-driver": "git+https://github.com/CptLemming/adafruit-i2c-pwm-driver.git",
+    "express": "^4.12.2",
+    "socketio": "^1.3.2"
+  }
+}
