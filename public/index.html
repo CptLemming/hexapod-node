@@ -3,26 +3,156 @@
 <head>
   <meta charset="UTF-8">
   <title>Hexy</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="servo" data-id="0">
-    <h1>Servo 0</h1>
-    <button class="high">High</button>
-    <button class="low">Low</button>
-  </div>
+  <h1>Hexapod</h1>
 
-  <div class="servo" data-id="1">
-    <h1>Servo 1</h1>
-    <button class="high">High</button>
-    <button class="low">Low</button>
-  </div>
+  <table class="control-gui table table-bordered table-hover table-condensed">
+    <thead>
+      <tr>
+        <th>Side</th>
+        <th>Position</th>
+        <th>Joint</th>
+        <th>High</th>
+        <th>Low</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-side="left" data-leg="1" data-joint="shoulder">
+        <td class="info">Left</td>
+        <td><span class="badge">1</span></td>
+        <td class="success">Shoulder</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+      <tr data-side="left" data-leg="1" data-joint="elbow">
+        <td class="info">Left</td>
+        <td><span class="badge">1</span></td>
+        <td class="warning">Elbow</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+      <tr data-side="left" data-leg="1" data-joint="wrist">
+        <td class="info">Left</td>
+        <td><span class="badge">1</span></td>
+        <td class="danger">Wrist</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
 
-  <div class="servo" data-id="2">
-    <h1>Servo 2</h1>
-    <button class="high">High</button>
-    <button class="low">Low</button>
-  </div>
+      <tr data-side="left" data-leg="2" data-joint="shoulder">
+        <td class="info">Left</td>
+        <td><span class="badge">2</span></td>
+        <td class="success">Shoulder</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+      <tr data-side="left" data-leg="2" data-joint="elbow">
+        <td class="info">Left</td>
+        <td><span class="badge">2</span></td>
+        <td class="warning">Elbow</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+      <tr data-side="left" data-leg="2" data-joint="wrist">
+        <td class="info">Left</td>
+        <td><span class="badge">2</span></td>
+        <td class="danger">Wrist</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+
+      <tr data-side="left" data-leg="3" data-joint="shoulder">
+        <td class="info">Left</td>
+        <td><span class="badge">3</span></td>
+        <td class="success">Shoulder</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+      <tr data-side="left" data-leg="3" data-joint="elbow">
+        <td class="info">Left</td>
+        <td><span class="badge">3</span></td>
+        <td class="warning">Elbow</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+      <tr data-side="left" data-leg="3" data-joint="wrist">
+        <td class="info">Left</td>
+        <td><span class="badge">3</span></td>
+        <td class="danger">Wrist</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+
+      <tr data-side="right" data-leg="1" data-joint="shoulder">
+        <td class="active">Right</td>
+        <td><span class="badge">1</span></td>
+        <td class="success">Shoulder</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+      <tr data-side="right" data-leg="1" data-joint="elbow">
+        <td class="active">Right</td>
+        <td><span class="badge">1</span></td>
+        <td class="warning">Elbow</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+      <tr data-side="right" data-leg="1" data-joint="wrist">
+        <td class="active">Right</td>
+        <td><span class="badge">1</span></td>
+        <td class="danger">Wrist</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+
+      <tr data-side="right" data-leg="2" data-joint="shoulder">
+        <td class="active">Right</td>
+        <td><span class="badge">2</span></td>
+        <td class="success">Shoulder</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+      <tr data-side="right" data-leg="2" data-joint="elbow">
+        <td class="active">Right</td>
+        <td><span class="badge">1</span></td>
+        <td class="warning">Elbow</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+      <tr data-side="right" data-leg="2" data-joint="wrist">
+        <td class="active">Right</td>
+        <td><span class="badge">1</span></td>
+        <td class="danger">Wrist</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+
+      <tr data-side="right" data-leg="3" data-joint="shoulder">
+        <td class="active">Right</td>
+        <td><span class="badge">3</span></td>
+        <td class="success">Shoulder</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+      <tr data-side="right" data-leg="3" data-joint="elbow">
+        <td class="active">Right</td>
+        <td><span class="badge">3</span></td>
+        <td class="warning">Elbow</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+      <tr data-side="right" data-leg="3" data-joint="wrist">
+        <td class="active">Right</td>
+        <td><span class="badge">3</span></td>
+        <td class="danger">Wrist</td>
+        <td><button class="high btn btn-primary btn-sm">High</button></td>
+        <td><button class="low btn btn-info btn-sm">Low</button></td>
+      </tr>
+    </tbody>
+  </table>
 
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>

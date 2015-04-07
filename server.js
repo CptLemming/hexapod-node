@@ -1,23 +1,70 @@
 // Servo
 var PwmDriver = require('adafruit-i2c-pwm-driver');
 
-var pwm = new PwmDriver(0x40);
+var leftPwm = new PwmDriver(0x40);
+var rightPwm = new PwmDriver(0x41);
 
 console.log('--- Connected ---');
 
 var servoMin = 250;
 var servoMax = 600;
 
-pwm.setPWMFreq(60);
+leftPwm.setPWMFreq(60);
+rightPwm.setPWMFreq(60);
 
-var setHigh = function(channel) {
-  console.log('setHigh', servoMax);
-  pwm.setPWM(channel, 0, servoMax);
+var control_points = {
+	left: {
+		1: {
+			shoulder: 0,
+			elbow: 1,
+			wrist: 2
+		},
+		2: {
+			shoulder: 4,
+			elbow: 5,
+			wrist: 6,
+		},
+		3: {
+			shoulder: 8,
+			elbow: 9,
+			wrist: 10
+		}
+	},
+	right: {
+		1: {
+			shoulder: 0,
+			elbow: 1,
+			wrist: 2
+		},
+		2: {
+			shoulder: 4,
+			elbow: 5,
+			wrist: 6,
+		},
+		3: {
+			shoulder: 8,
+			elbow: 9,
+			wrist: 10
+		}
+	}
 };
 
-var setLow = function(channel) {
-  console.log('setLow', servoMin);
-  pwm.setPWM(channel, 0, servoMin);
+var setHigh = function(side, leg, joint) {
+  console.log('setHigh', side, leg, joint);
+  if (side == 'left') {
+  	leftPwm.setPWM(control_points.left[leg][joint], 0, servoMax);
+  } else if (side == 'right') {
+  	rightPwm.setPWM(control_points.right[leg][joint], 0, servoMax);
+  }
+};
+
+var setLow = function(side, leg, joint) {
+  console.log('setLow', side, leg, joint);
+  if (side == 'left') {
+  	leftPwm.setPWM(control_points.left[leg][joint], 0, servoMin);
+  } else if (side == 'right') {
+  	rightPwm.setPWM(control_points.right[leg][joint], 0, servoMin);
+  }
 };
 
 // Server
@@ -33,12 +80,12 @@ io.on('connection', function(socket){
 
 	socket.on('setHigh', function(data) {
 		console.log('setHigh DATA', data);
-		setHigh(data.channel);
+		setHigh(data.side, data.leg, data.joint);
 	});
 
 	socket.on('setLow', function(data) {
 		console.log('setLow DATA', data);
-		setLow(data.channel);
+		setLow(data.data.side, data.leg, data.joint);
 	});
 });
 
