@@ -88,17 +88,17 @@ var control_points = {
 			shoulder: {
 				channel: 4,
 				min: 250,
-				max: 600
+				max: 400
 			},
 			elbow: {
 				channel: 5,
-				min: 250,
-				max: 600
+				min: 300,
+				max: 450
 			},
 			wrist: {
 				channel: 6,
-				min: 250,
-				max: 600
+				min: 350,
+				max: 500
 			}
 		},
 		3: {
