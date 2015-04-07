@@ -15,55 +15,133 @@ rightPwm.setPWMFreq(60);
 var control_points = {
 	left: {
 		1: {
-			shoulder: 0,
-			elbow: 1,
-			wrist: 2
+			shoulder: {
+				channel: 0,
+				min: 250,
+				max: 600
+			},
+			elbow: {
+				channel: 1,
+				min: 250,
+				max: 600
+			},
+			wrist: {
+				channel: 2,
+				min: 250,
+				max: 600
+			}
 		},
 		2: {
-			shoulder: 4,
-			elbow: 5,
-			wrist: 6,
+			shoulder: {
+				channel: 4,
+				min: 250,
+				max: 600
+			},
+			elbow: {
+				channel: 5,
+				min: 250,
+				max: 600
+			},
+			wrist: {
+				channel: 6,
+				min: 250,
+				max: 600
+			}
 		},
 		3: {
-			shoulder: 8,
-			elbow: 9,
-			wrist: 10
+			shoulder: {
+				channel: 8,
+				min: 250,
+				max: 600
+			},
+			elbow: {
+				channel: 9,
+				min: 250,
+				max: 600
+			},
+			wrist: {
+				channel: 10,
+				min: 250,
+				max: 600
+			}
 		}
 	},
 	right: {
 		1: {
-			shoulder: 0,
-			elbow: 1,
-			wrist: 2
+			shoulder: {
+				channel: 0,
+				min: 250,
+				max: 600
+			},
+			elbow: {
+				channel: 1,
+				min: 250,
+				max: 600
+			},
+			wrist: {
+				channel: 2,
+				min: 250,
+				max: 600
+			}
 		},
 		2: {
-			shoulder: 4,
-			elbow: 5,
-			wrist: 6,
+			shoulder: {
+				channel: 4,
+				min: 250,
+				max: 600
+			},
+			elbow: {
+				channel: 5,
+				min: 250,
+				max: 600
+			},
+			wrist: {
+				channel: 6,
+				min: 250,
+				max: 600
+			}
 		},
 		3: {
-			shoulder: 8,
-			elbow: 9,
-			wrist: 10
+			shoulder: {
+				channel: 8,
+				min: 250,
+				max: 600
+			},
+			elbow: {
+				channel: 9,
+				min: 250,
+				max: 600
+			},
+			wrist: {
+				channel: 10,
+				min: 250,
+				max: 600
+			}
 		}
 	}
 };
 
-var setHigh = function(side, leg, joint) {
+var setHigh = function(side, leg, joint, value) {
   console.log('setHigh', side, leg, joint);
+  var servo;
   if (side == 'left') {
-  	leftPwm.setPWM(control_points.left[leg][joint], 0, servoMax);
+  	servo = control_points.left[leg][joint];
+  	leftPwm.setPWM(servo.channel, 0, value || servo.max);
   } else if (side == 'right') {
-  	rightPwm.setPWM(control_points.right[leg][joint], 0, servoMax);
+  	servo = control_points.right[leg][joint];
+  	rightPwm.setPWM(servo.channel, 0, value || servo.max);
   }
 };
 
-var setLow = function(side, leg, joint) {
+var setLow = function(side, leg, joint, value) {
   console.log('setLow', side, leg, joint);
+  var servo;
   if (side == 'left') {
-  	leftPwm.setPWM(control_points.left[leg][joint], 0, servoMin);
+  	servo = control_points.left[leg][joint];
+  	leftPwm.setPWM(servo.channel, 0, value || servo.min);
   } else if (side == 'right') {
-  	rightPwm.setPWM(control_points.right[leg][joint], 0, servoMin);
+  	servo = control_points.right[leg][joint];
+  	rightPwm.setPWM(servo.channel, 0, value || servo.min);
   }
 };
 
@@ -72,20 +150,20 @@ var express = require('express');
 var app = express();
 
 var server = require('http').createServer(app);
-var io = require('socketio')(server);
+var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
 	console.log('Connected');
-	socket.emit('login');
+	socket.emit('login', control_points);
 
 	socket.on('setHigh', function(data) {
-		console.log('setHigh DATA', data);
-		setHigh(data.side, data.leg, data.joint);
+		// console.log('setHigh DATA', data);
+		setHigh(data.side, data.leg, data.joint, data.value);
 	});
 
 	socket.on('setLow', function(data) {
-		console.log('setLow DATA', data);
-		setLow(data.data.side, data.leg, data.joint);
+		// console.log('setLow DATA', data);
+		setLow(data.side, data.leg, data.joint, data.value);
 	});
 });
 

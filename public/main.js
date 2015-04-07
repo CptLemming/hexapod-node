@@ -2,36 +2,43 @@ $(function() {
   var connected = false;
   var socket = io();
 
-  var setHigh = function(side, leg, joint) {
+  var setHigh = function(side, leg, joint, value) {
     if (connected) {
-      socket.emit('setHigh', { side: side, leg: leg, joint: joint });
+      socket.emit('setHigh', { side: side, leg: leg, joint: joint, value: value });
     }
   };
 
-  var setLow = function(side, leg, joint) {
+  var setLow = function(side, leg, joint, value) {
     if (connected) {
-      socket.emit('setLow', { side: side, leg: leg, joint: joint });
+      socket.emit('setLow', { side: side, leg: leg, joint: joint, value: value });
     }
   };
 
-  socket.on('login', function (data) {
+  socket.on('login', function(data) {
     connected = true;
-    console.log('Connected');
-  });
+    console.log('Connected', data);
 
-  $('.control-gui tr').each(function() {
-    var side = $(this).data('side');
-    var leg = $(this).data('leg');
-    var joint = $(this).data('joint');
+    $('.control-gui tbody tr').each(function() {
+      var side = $(this).data('side');
+      var leg = $(this).data('leg');
+      var joint = $(this).data('joint');
+      var servo = data[side][leg][joint];
 
-    $('.high', this).click(function() {
-      console.log('setHigh', side, leg, joint);
-      setHigh(side, leg, joint);
-    });
+      var inputHigh = $('input[name="high"]', this);
+      var inputLow = $('input[name="low"]', this);
 
-    $('.low', this).click(function() {
-      console.log('setLow', side, leg, joint);
-      setLow(side, leg, joint);
+      inputHigh.val(servo.max);
+      inputLow.val(servo.min);
+
+      $('button.high', this).click(function() {
+        console.log('setHigh', side, leg, joint);
+        setHigh(side, leg, joint, inputHigh.val());
+      });
+
+      $('button.low', this).click(function() {
+        console.log('setLow', side, leg, joint);
+        setLow(side, leg, joint, inputLow.val());
+      });
     });
   });
 });
