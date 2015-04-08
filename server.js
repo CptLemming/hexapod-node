@@ -43,9 +43,9 @@ var control_points = {
 				max: 350
 			},
 			wrist: {
-				channel: 6, // TODO: Needs readjusting
-				min: 200,
-				max: 300
+				channel: 6,
+				min: 250,
+				max: 400
 			}
 		},
 		3: {
