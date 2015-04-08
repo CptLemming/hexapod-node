@@ -55,9 +55,9 @@ var control_points = {
 				max: 450
 			},
 			elbow: {
-				channel: 9, // TODO: Needs adjusting
+				channel: 9,
 				min: 200,
-				max: 300
+				max: 350
 			},
 			wrist: {
 				channel: 10,
