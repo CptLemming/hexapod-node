@@ -265,7 +265,7 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('walk', function(data) {
-		switch (data.stage) {
+		switch (data.stage.toString()) {
 			case '1':
 				walkStage1();
 				break;
