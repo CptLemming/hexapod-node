@@ -149,12 +149,12 @@ var standUp = function() {
 	var elbow, wrist;
 	for (var side in control_points) {
 		for (var leg in control_points[side]) {
-			eblow = control_points[side][leg].elbow;
+			elbow = control_points[side][leg].elbow;
 			wrist = control_points[side][leg].wrist;
 
 			if (side == 'left') {
-				leftPwm.setPWM(eblow.channel, 0, elbow.min);
-				leftPwm.setPWM(wirst.channel, 0, wrist.max);
+				leftPwm.setPWM(elbow.channel, 0, elbow.min);
+				leftPwm.setPWM(wrist.channel, 0, wrist.max);
 			} else {
 				rightPwm.setPWM(elbow.channel, 0, elbow.min);
 				rightPwm.setPWM(wrist.channel, 0, wrist.max);
@@ -167,12 +167,14 @@ var sitDown = function() {
 	var elbow, wrist;
 	for (var side in control_points) {
 		for (var leg in control_points[side]) {
-			eblow = control_points[side][leg].elbow;
+			elbow = control_points[side][leg].elbow;
 			wrist = control_points[side][leg].wrist;
+console.log('Elbow', side, leg, elbow);
+console.log('Wrist', side, leg, wrist);
 
 			if (side == 'left') {
-				leftPwm.setPWM(eblow.channel, 0, elbow.max);
-				leftPwm.setPWM(wirst.channel, 0, wrist.min);
+				leftPwm.setPWM(elbow.channel, 0, elbow.max);
+				leftPwm.setPWM(wrist.channel, 0, wrist.min);
 			} else {
 				rightPwm.setPWM(elbow.channel, 0, elbow.max);
 				rightPwm.setPWM(wrist.channel, 0, wrist.min);
