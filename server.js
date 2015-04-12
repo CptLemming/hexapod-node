@@ -181,6 +181,76 @@ var sitDown = function() {
 	}
 };
 
+var walkStage1 = function() {
+	// L1, L3, R2 up
+	setHigh('left', '1', 'elbow');
+	setLow('left', '1', 'wrist');
+
+	setHigh('left', '3', 'elbow');
+	setLow('left', '3', 'wrist');
+
+	setHigh('right', '2', 'elbow');
+	setLow('right', '2', 'wrist');
+};
+
+var walkStage2 = function() {
+	// L1, L2, L3, R1, R2, R3 forward
+	setHigh('left', '1', 'shoulder');
+	setHigh('left', '2', 'shoulder');
+	setHigh('left', '3', 'shoulder');
+
+	setHigh('right', '1', 'shoulder');
+	setHigh('right', '2', 'shoulder');
+	setHigh('right', '3', 'shoulder');
+};
+
+var walkStage3 = function() {
+	// L1, L3, R2 down
+	setLow('left', '1', 'elbow');
+	setHigh('left', '1', 'wrist');
+
+	setLow('left', '3', 'elbow');
+	setHigh('left', '3', 'wrist');
+
+	setLow('right', '2', 'elbow');
+	setHigh('right', '2', 'wrist');
+};
+
+var walkStage4 = function() {
+	// R1, R3, L2 up
+	setHigh('right', '1', 'elbow');
+	setLow('right', '1', 'wrist');
+
+	setHigh('right', '3', 'elbow');
+	setLow('right', '3', 'wrist');
+
+	setHigh('left', '2', 'elbow');
+	setLow('left', '2', 'wrist');
+};
+
+var walkStage5 = function() {
+	// L1, L2, L3, R1, R2, R3 backward
+	setLow('left', '1', 'shoulder');
+	setLow('left', '2', 'shoulder');
+	setLow('left', '3', 'shoulder');
+
+	setLow('right', '1', 'shoulder');
+	setLow('right', '2', 'shoulder');
+	setLow('right', '3', 'shoulder');
+};
+
+var walkStage6 = function() {
+	// R1, R3, L2 down
+	setLow('right', '1', 'elbow');
+	setHigh('right', '1', 'wrist');
+
+	setLow('right', '3', 'elbow');
+	setHigh('right', '3', 'wrist');
+
+	setLow('left', '2', 'elbow');
+	setHigh('left', '2', 'wrist');
+};
+
 // Server
 var express = require('express');
 var app = express();
@@ -208,6 +278,29 @@ io.on('connection', function(socket){
 
 	socket.on('sitDown', function() {
 		sitDown();
+	});
+
+	socket.on('walk', function(data) {
+		switch (data.stage) {
+			case '1':
+				walkStage1();
+				break;
+			case '2':
+				walkStage2();
+				break;
+			case '3':
+				walkStage3();
+				break;
+			case '4':
+				walkStage4();
+				break;
+			case '5':
+				walkStage5();
+				break;
+			case '6':
+				walkStage6();
+				break;
+		}
 	});
 });
 

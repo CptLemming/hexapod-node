@@ -26,6 +26,12 @@ $(function() {
     }
   };
 
+  var walk = function(stage) {
+    if (connected) {
+      socket.emit('walk', { stage: stage });
+    }
+  };
+
   socket.on('login', function(data) {
     connected = true;
     console.log('Connected', data);
@@ -36,6 +42,11 @@ $(function() {
 
     $('#sit').on('click', function() {
       sitDown();
+    });
+
+    $('.walk').on('click', function() {
+      var stage = $(this).data('stage');
+      walk(stage);
     });
 
     $('.control-gui tbody tr').each(function() {
