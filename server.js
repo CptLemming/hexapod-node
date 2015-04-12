@@ -44,8 +44,8 @@ var control_points = {
 			},
 			wrist: {
 				channel: 6,
-				min: 250,
-				max: 400
+				min: 400,
+				max: 250
 			}
 		},
 		3: {
@@ -61,8 +61,8 @@ var control_points = {
 			},
 			wrist: {
 				channel: 10,
-				min: 200,
-				max: 350
+				min: 350,
+				max: 200
 			}
 		}
 	},
