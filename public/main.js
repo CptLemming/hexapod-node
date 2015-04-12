@@ -14,9 +14,29 @@ $(function() {
     }
   };
 
+  var standUp = function() {
+    if (connected) {
+      socket.emit('standUp');
+    }
+  };
+
+  var sitDown = function() {
+    if (connected) {
+      socket.emit('sitDown');
+    }
+  };
+
   socket.on('login', function(data) {
     connected = true;
     console.log('Connected', data);
+
+    $('#stand').on('click', function() {
+      standUp();
+    });
+
+    $('#sit').on('click', function() {
+      sitDown();
+    });
 
     $('.control-gui tbody tr').each(function() {
       var side = $(this).data('side');
