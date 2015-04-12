@@ -75,8 +75,8 @@ var control_points = {
 			},
 			elbow: {
 				channel: 1,
-				min: 300,
-				max: 450
+				min: 450,
+				max: 300
 			},
 			wrist: {
 				channel: 2,
@@ -92,8 +92,8 @@ var control_points = {
 			},
 			elbow: {
 				channel: 5,
-				min: 300,
-				max: 450
+				min: 450,
+				max: 300
 			},
 			wrist: {
 				channel: 6,
@@ -109,8 +109,8 @@ var control_points = {
 			},
 			elbow: {
 				channel: 9,
-				min: 350,
-				max: 500
+				min: 500,
+				max: 350
 			},
 			wrist: {
 				channel: 10,
