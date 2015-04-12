@@ -149,16 +149,8 @@ var standUp = function() {
 	var elbow, wrist;
 	for (var side in control_points) {
 		for (var leg in control_points[side]) {
-			elbow = control_points[side][leg].elbow;
-			wrist = control_points[side][leg].wrist;
-
-			if (side == 'left') {
-				leftPwm.setPWM(elbow.channel, 0, elbow.min);
-				leftPwm.setPWM(wrist.channel, 0, wrist.max);
-			} else {
-				rightPwm.setPWM(elbow.channel, 0, elbow.min);
-				rightPwm.setPWM(wrist.channel, 0, wrist.max);
-			}
+			setLow(side, leg, 'eblow');
+			setHigh(side, leg, 'wrist');
 		}
 	}
 };
@@ -167,16 +159,8 @@ var sitDown = function() {
 	var elbow, wrist;
 	for (var side in control_points) {
 		for (var leg in control_points[side]) {
-			elbow = control_points[side][leg].elbow;
-			wrist = control_points[side][leg].wrist;
-
-			if (side == 'left') {
-				leftPwm.setPWM(elbow.channel, 0, elbow.max);
-				leftPwm.setPWM(wrist.channel, 0, wrist.min);
-			} else {
-				rightPwm.setPWM(elbow.channel, 0, elbow.max);
-				rightPwm.setPWM(wrist.channel, 0, wrist.min);
-			}
+			setHigh(side, leg, 'eblow');
+			setLow(side, leg, 'wrist');
 		}
 	}
 };
