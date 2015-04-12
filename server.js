@@ -169,8 +169,6 @@ var sitDown = function() {
 		for (var leg in control_points[side]) {
 			elbow = control_points[side][leg].elbow;
 			wrist = control_points[side][leg].wrist;
-console.log('Elbow', side, leg, elbow);
-console.log('Wrist', side, leg, wrist);
 
 			if (side == 'left') {
 				leftPwm.setPWM(elbow.channel, 0, elbow.max);
