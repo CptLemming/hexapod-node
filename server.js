@@ -149,7 +149,7 @@ var standUp = function() {
 	var elbow, wrist;
 	for (var side in control_points) {
 		for (var leg in control_points[side]) {
-			setLow(side, leg, 'eblow');
+			setLow(side, leg, 'elbow');
 			setHigh(side, leg, 'wrist');
 		}
 	}
@@ -159,7 +159,7 @@ var sitDown = function() {
 	var elbow, wrist;
 	for (var side in control_points) {
 		for (var leg in control_points[side]) {
-			setHigh(side, leg, 'eblow');
+			setHigh(side, leg, 'elbow');
 			setLow(side, leg, 'wrist');
 		}
 	}
