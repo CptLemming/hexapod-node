@@ -35,6 +35,10 @@ $(function() {
   socket.on('login', function(data) {
     connected = true;
     console.log('Connected', data);
+    
+    socket.on('video-stream', function(data) {
+      $('#video-stream').attr('src', data.imgSrc);
+    });
 
     $('#stand').on('click', function() {
       standUp();

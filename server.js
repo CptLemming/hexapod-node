@@ -1,16 +1,20 @@
 // Servo
-var PwmDriver = require('adafruit-i2c-pwm-driver');
+try {
+  var PwmDriver = require('adafruit-i2c-pwm-driver');
 
-var leftPwm = new PwmDriver(0x40);
-var rightPwm = new PwmDriver(0x41);
+  var leftPwm = new PwmDriver(0x40);
+  var rightPwm = new PwmDriver(0x41);
 
-console.log('--- Connected ---');
+  console.log('--- Connected ---');
 
-var servoMin = 250;
-var servoMax = 600;
+  var servoMin = 250;
+  var servoMax = 600;
 
-leftPwm.setPWMFreq(60);
-rightPwm.setPWMFreq(60);
+  leftPwm.setPWMFreq(60);
+  rightPwm.setPWMFreq(60);
+} catch(err) {
+  console.log('Error connecting to I2C');
+}
 
 var control_points = {
 	left: {
@@ -235,6 +239,38 @@ var walkStage6 = function() {
 	setHigh('left', '2', 'wrist');
 };
 
+// Camera
+var RaspiCam = require('raspicam');
+var camera = new RaspiCam({
+  mode: 'timelapse',
+  output: './public/timelapse/photo_%06d.jpg',
+  encoding: 'jpg',
+  timelapse: 250,
+  timeout: 0
+});
+
+var spawn = require('child_process').spawn;
+var fs = require('fs');
+
+camera.on('start', function(err, timestamp) {
+  console.log('-- Camera Started --');
+});
+
+camera.on('read', function(err, timestamp, filename) {
+  if (filename.indexOf('~') === -1) {
+    console.log('Image', filename);
+    io.sockets.emit('video-stream', {imgSrc: 'timelapse/'+ filename});
+  }
+});
+
+camera.on('exit', function(timestamp) {
+  console.log('-- Camera Exit --');
+});
+
+camera.on('stop', function(err, timestamp) {
+  console.log('-- Camera Stop --');
+});
+
 // Server
 var express = require('express');
 var app = express();
@@ -291,5 +327,7 @@ io.on('connection', function(socket){
 server.listen(3000, function() {
 	console.log('Server listening on port 3000');
 });
+
+camera.start();
 
 app.use(express.static(__dirname + '/public'));
